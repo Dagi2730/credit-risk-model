@@ -1,63 +1,133 @@
-# credit-risk-model
+## Task 2 - Exploratory Data Analysis (EDA) 🔍
 
-📘 Credit Scoring Business Understanding
-1. How does the Basel II Accord’s emphasis on risk measurement influence our need for an interpretable and well-documented model?
-The Basel II Capital Accord provides a regulatory framework that requires banks to quantify, manage, and report credit risk more effectively. It allows institutions to develop their own Internal Ratings-Based (IRB) models for credit assessment, but these must adhere to strict standards of transparency, validation, and accountability.
+A credit risk modeling project aimed at developing a robust probability of default model for a digital lending service. The project follows a structured data science pipeline including EDA, feature engineering, and modeling — in partnership with an eCommerce company offering Buy Now, Pay Later services.
 
-This creates a strong demand for credit risk models that are:
+---
 
-Interpretable: The logic behind each prediction must be clearly understandable by analysts and regulators.
+## 📁 Project Structure
 
-Well-documented: Every transformation, assumption, and decision in the modeling process must be recorded and justified.
+credit-risk-model/
 
-Auditable: Models must be reproducible and their outcomes explainable to external auditors and internal risk teams.
+│
 
-In practical terms, this means prioritizing models that are not black boxes. Tools like Weight of Evidence (WoE) and Logistic Regression are favored because they translate inputs into understandable effects on risk, aligning closely with Basel II’s goals of risk transparency and responsible governance.
+├── data/
 
-2. Since we lack a direct "default" label, why is creating a proxy variable necessary, and what are the potential business risks of making predictions based on this proxy?
-In our dataset, there is no explicit indicator that tells us whether a customer defaulted on a loan. However, to train a supervised machine learning model, a target label is required. Therefore, we must create a proxy variable—an indirect indicator that approximates the concept of "default."
+│ └── raw/ # Contains original raw datasets
 
-One widely accepted method is to engineer a proxy using RFM analysis (Recency, Frequency, and Monetary value). By evaluating how recently a customer made a transaction, how often they transact, and how much they spend, we can infer behavioral signals of risk. For example:
+│ ├── data.csv
 
-Customers with low frequency and low transaction amounts over long periods may be flagged as disengaged or high-risk.
+│ └── Xente_Variable_Definitions.csv
 
-However, using a proxy comes with significant business risks:
+│
 
-Labeling errors: A poorly defined proxy may misclassify reliable customers as risky (or vice versa), leading to poor credit decisions.
+├── notebooks/
 
-Model mislearning: The model may learn patterns that reflect noise in the proxy rather than true risk behavior.
+│ └── 1.0-eda.ipynb # Jupyter notebook for exploratory analysis
 
-Regulatory scrutiny: Predicting creditworthiness from an unvalidated proxy may be challenged by regulators or risk departments.
+│
 
-To mitigate these risks, proxy construction must be methodologically sound, explainable, and validated with business logic.
+├── src/ # Scripts for data processing and modeling
 
-3. What are the key trade-offs between using a simple, interpretable model (like Logistic Regression with WoE) versus a complex, high-performance model (like Gradient Boosting) in a regulated financial context?
-In credit scoring—especially under the scrutiny of financial regulators—there is a fundamental trade-off between performance and interpretability.
+│ └── (To be developed)
 
-Factor	Simple Model (e.g., Logistic Regression + WoE)	Complex Model (e.g., Gradient Boosting / XGBoost)
-Interpretability	High – easily explainable to stakeholders	Low – requires tools like SHAP or LIME
-Regulatory Approval	Easy to audit and justify	More difficult to explain model behavior
-Bias Detection	Easier to detect and correct	Complex interactions can hide biases
-Performance	May underfit non-linear or complex relationships	High accuracy, can capture subtle patterns
-Ease of Deployment	Lightweight, easy to monitor	Requires robust infrastructure and explainability layers
+│
 
-In regulated environments such as banking, simplicity and interpretability are often prioritized. However, if a complex model offers significantly better performance, it may still be adopted provided it is:
+├── images/ # Visual outputs/screenshots from EDA
 
-Accompanied by explainability frameworks (e.g., SHAP values)
+│ └── eda_distribution.png
 
-Thoroughly tested and validated
+│
 
-Supported with strong documentation and governance processes
+├── requirements.txt # Python dependencies (to be completed)
 
-Ultimately, model choice must align with both regulatory standards and business objectives.
+├── .gitignore # Ignore Python cache, data, and Jupyter checkpoints
 
-✅ Summary
-This section ensures we have a solid foundation for our credit scoring model by:
+├── README.md # Project overview and documentation
 
-Aligning with regulatory expectations (Basel II)
+└── INTERIM_PROGRESS.md # Interim report with analysis summary and progress
 
-Justifying the use of a proxy target
 
-Evaluating the trade-offs between interpretability and performance
+---
 
-This foundation will guide all further work, including feature engineering, proxy construction, model training, and deployment.
+## 🎯 Project Objective
+
+To build a machine learning model that predicts the likelihood of loan default, supporting responsible lending decisions for an eCommerce BNPL (Buy Now, Pay Later) service. This aligns with **Basel II** compliance by quantifying **Probability of Default (PD)** and improving credit risk assessment.
+
+---
+
+## 🔍 Task 2 - Exploratory Data Analysis (EDA)
+
+### ✅ Objective  
+Explore the dataset to uncover its structure, quality, and key patterns — laying the foundation for informed feature engineering and modeling decisions.
+
+### 📊 Key Activities
+
+- **Data Structure** – Inspected shape, columns, and datatypes.
+- **Summary Statistics** – Assessed central tendency and spread.
+- **Numerical Feature Distribution** – Visualized with histograms and boxplots.
+- **Categorical Feature Distribution** – Checked category frequencies and imbalances.
+- **Correlation Analysis** – Used heatmaps to study feature relationships.
+- **Missing Values** – Evaluated nulls and concluded no missing data exists.
+- **Outlier Detection** – Used boxplots to flag extreme values.
+
+### 📌 Insights
+
+- No missing values ➡️ reduces need for imputation.
+- Strong skew and outliers in financial features.
+- Some features show multicollinearity.
+- Categorical features show imbalance.
+- Dataset size is sufficient for modeling.
+
+
+## ⚙️ Setup Instructions
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Dagi2730/credit-risk-model.git
+   cd credit-risk-model
+2. Create and activate virtual environment:
+
+python -m venv venv
+
+venv\Scripts\activate   # Windows
+
+3. Install dependencies:
+
+pip install -r requirements.txt
+
+4. Launch Jupyter Notebook:
+
+jupyter notebook
+
+🚧 Next Steps
+
+Implement feature engineering in src/
+
+Build transformation pipelines using sklearn.pipeline.Pipeline
+
+Encode categorical features (One-Hot / Label Encoding)
+
+Handle outliers and normalization
+
+Begin model development and evaluation
+
+🧰 Tools & Libraries
+
+Python 3.12
+
+Pandas, NumPy
+
+Matplotlib, Seaborn
+
+Jupyter Notebook
+
+(Upcoming: Scikit-learn, XGBoost, SHAP)
+
+🗂️ Status
+
+✅ EDA Completed
+
+🕒 Feature Engineering – Pending
+
+🕒 Modeling – Not Yet Started
+
