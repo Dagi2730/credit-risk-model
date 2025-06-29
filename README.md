@@ -1,63 +1,54 @@
-# credit-risk-model
+Task 2 - Exploratory Data Analysis (EDA) 🔍
+Objective
+The goal of Task 2 is to thoroughly explore the dataset to understand its structure, quality, and underlying patterns. This foundational analysis helps uncover insights and guides subsequent feature engineering and modeling steps for the credit risk project.
 
-📘 Credit Scoring Business Understanding
-1. How does the Basel II Accord’s emphasis on risk measurement influence our need for an interpretable and well-documented model?
-The Basel II Capital Accord provides a regulatory framework that requires banks to quantify, manage, and report credit risk more effectively. It allows institutions to develop their own Internal Ratings-Based (IRB) models for credit assessment, but these must adhere to strict standards of transparency, validation, and accountability.
+Overview
+Exploratory Data Analysis (EDA) is a crucial step in any data science workflow. It involves summarizing the main characteristics of the data, visualizing distributions, detecting anomalies, and identifying relationships between variables. This analysis was performed using Jupyter Notebooks to ensure transparency and reproducibility.
 
-This creates a strong demand for credit risk models that are:
+Key Activities
+The EDA focused on:
 
-Interpretable: The logic behind each prediction must be clearly understandable by analysts and regulators.
+Data Structure:
+Examined the number of rows, columns, and data types to understand dataset shape and schema.
 
-Well-documented: Every transformation, assumption, and decision in the modeling process must be recorded and justified.
+Summary Statistics:
+Calculated mean, median, standard deviation, and other metrics to understand feature distributions.
 
-Auditable: Models must be reproducible and their outcomes explainable to external auditors and internal risk teams.
+Numerical Feature Distribution:
+Visualized using histograms and box plots to detect skewness, outliers, and spread.
 
-In practical terms, this means prioritizing models that are not black boxes. Tools like Weight of Evidence (WoE) and Logistic Regression are favored because they translate inputs into understandable effects on risk, aligning closely with Basel II’s goals of risk transparency and responsible governance.
+Categorical Feature Distribution:
+Analyzed category frequencies to identify dominant classes and potential imbalances.
 
-2. Since we lack a direct "default" label, why is creating a proxy variable necessary, and what are the potential business risks of making predictions based on this proxy?
-In our dataset, there is no explicit indicator that tells us whether a customer defaulted on a loan. However, to train a supervised machine learning model, a target label is required. Therefore, we must create a proxy variable—an indirect indicator that approximates the concept of "default."
+Correlation Analysis:
+Explored relationships between numerical features using correlation matrices and heatmaps.
 
-One widely accepted method is to engineer a proxy using RFM analysis (Recency, Frequency, and Monetary value). By evaluating how recently a customer made a transaction, how often they transact, and how much they spend, we can infer behavioral signals of risk. For example:
+Missing Values:
+Checked for missing or null data to plan imputation or cleaning strategies.
 
-Customers with low frequency and low transaction amounts over long periods may be flagged as disengaged or high-risk.
+Outlier Detection:
+Used box plots to identify extreme values that may affect model performance.
 
-However, using a proxy comes with significant business risks:
+🔑 Summary of Insights
+✅ No missing values were detected, ensuring data completeness and reducing the need for imputation.
 
-Labeling errors: A poorly defined proxy may misclassify reliable customers as risky (or vice versa), leading to poor credit decisions.
+⚠️ Several numerical features show skewed distributions and significant outliers which will require transformation or treatment during preprocessing.
 
-Model mislearning: The model may learn patterns that reflect noise in the proxy rather than true risk behavior.
+📊 Categorical variables are somewhat imbalanced, highlighting the need for careful encoding and possible resampling techniques.
 
-Regulatory scrutiny: Predicting creditworthiness from an unvalidated proxy may be challenged by regulators or risk departments.
+🤝 Strong correlations among some numerical features were identified, which can inform feature selection and engineering.
 
-To mitigate these risks, proxy construction must be methodologically sound, explainable, and validated with business logic.
+📈 The dataset size and quality are adequate for building robust and reliable credit risk models.
 
-3. What are the key trade-offs between using a simple, interpretable model (like Logistic Regression with WoE) versus a complex, high-performance model (like Gradient Boosting) in a regulated financial context?
-In credit scoring—especially under the scrutiny of financial regulators—there is a fundamental trade-off between performance and interpretability.
+Tools and Libraries
+Python 3.12
 
-Factor	Simple Model (e.g., Logistic Regression + WoE)	Complex Model (e.g., Gradient Boosting / XGBoost)
-Interpretability	High – easily explainable to stakeholders	Low – requires tools like SHAP or LIME
-Regulatory Approval	Easy to audit and justify	More difficult to explain model behavior
-Bias Detection	Easier to detect and correct	Complex interactions can hide biases
-Performance	May underfit non-linear or complex relationships	High accuracy, can capture subtle patterns
-Ease of Deployment	Lightweight, easy to monitor	Requires robust infrastructure and explainability layers
+Pandas for data handling
 
-In regulated environments such as banking, simplicity and interpretability are often prioritized. However, if a complex model offers significantly better performance, it may still be adopted provided it is:
+Matplotlib & Seaborn for visualization
 
-Accompanied by explainability frameworks (e.g., SHAP values)
+Jupyter Notebook for interactive exploration
 
-Thoroughly tested and validated
+Next Steps
+Based on these insights, we will build an automated feature engineering pipeline that transforms raw data into a model-ready format, improving prediction accuracy and interpretability.
 
-Supported with strong documentation and governance processes
-
-Ultimately, model choice must align with both regulatory standards and business objectives.
-
-✅ Summary
-This section ensures we have a solid foundation for our credit scoring model by:
-
-Aligning with regulatory expectations (Basel II)
-
-Justifying the use of a proxy target
-
-Evaluating the trade-offs between interpretability and performance
-
-This foundation will guide all further work, including feature engineering, proxy construction, model training, and deployment.
