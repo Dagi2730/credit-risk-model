@@ -1,98 +1,69 @@
-# =========================
-#  Python bytecode & cache
-# =========================
+# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
 
-# ====================
-#  Virtual environments
-# ====================
-env/
+# Virtual environment folders
 venv/
-ENV/
-env.bak/
-venv.bak/
+.venv/
+env/
+. env/
+*.env
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Python egg metadata
+*.egg-info/
+dist/
+build/
+
+# VS Code settings
+.vscode/
+
+# Mac system files
+.DS_Store
+
+# Logs and databases
+*.log
+*.sqlite3
+
+# PyCharm
+.idea/
+
+# Environment variables
+.env
+
+# Python wheel files
+*.whl
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment folders
+venv/
+.venv/
+.env/
 .venv/
 
-# ====================
-#  Jupyter notebooks
-# ====================
-.ipynb_checkpoints/
-.notebooks/
-*.ipynb~
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
 
-# ====================
-#  VSCode & IDE config
-# ====================
-.vscode/
-.idea/
-*.sublime-project
-*.sublime-workspace
-
-# ====================
-#  Logs
-# ====================
-*.log
-logs/
-*.out
-
-# ====================
-#  Environment variables
-# ====================
-.env
-.env.*
-
-# ====================
-#  MLflow / model artifacts
-# ====================
-mlruns/
-models/
-*.pkl
-*.joblib
-*.h5
-
-# ====================
-#  Data folders
-# ====================
-data/raw/
-data/processed/
-*.csv
-*.tsv
-*.xlsx
-*.xls
-*.parquet
-
-# ====================
-#  Docker
-# ====================
-*.pid
-*.sock
-*.tar
-docker-compose.override.yml
-
-# ====================
-#  Test & coverage
-# ====================
-coverage.xml
-htmlcov/
-.tox/
-.pytest_cache/
-.nox/
-
-# ====================
-#  Deployment
-# ====================
+# Distribution / packaging
 build/
 dist/
-.eggs/
 *.egg-info/
-MANIFEST
 
-# ====================
-#  Miscellaneous
-# ====================
-*.bak
-*.swp
+# PyCharm / VSCode / IDE configs
+.idea/
+.vscode/
+
+# Logs and databases
+*.log
+*.sqlite3
+
+# OS files
 .DS_Store
 Thumbs.db
