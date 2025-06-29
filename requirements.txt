@@ -1,0 +1,31 @@
+# Core
+pandas
+numpy
+scikit-learn
+matplotlib
+seaborn
+jupyter
+
+# Feature engineering
+xverse
+woe
+
+# Model evaluation & tracking
+mlflow
+optuna
+
+# API & Deployment
+fastapi
+uvicorn
+
+# Serialization
+joblib
+
+# Linting & Testing
+pytest
+flake8
+black
+
+# Optional enhancements
+python-dotenv       # for managing .env variables
+pydantic            # FastAPI model validation

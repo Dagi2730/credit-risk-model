@@ -1,0 +1,98 @@
+# =========================
+#  Python bytecode & cache
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# ====================
+#  Virtual environments
+# ====================
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+
+# ====================
+#  Jupyter notebooks
+# ====================
+.ipynb_checkpoints/
+.notebooks/
+*.ipynb~
+
+# ====================
+#  VSCode & IDE config
+# ====================
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# ====================
+#  Logs
+# ====================
+*.log
+logs/
+*.out
+
+# ====================
+#  Environment variables
+# ====================
+.env
+.env.*
+
+# ====================
+#  MLflow / model artifacts
+# ====================
+mlruns/
+models/
+*.pkl
+*.joblib
+*.h5
+
+# ====================
+#  Data folders
+# ====================
+data/raw/
+data/processed/
+*.csv
+*.tsv
+*.xlsx
+*.xls
+*.parquet
+
+# ====================
+#  Docker
+# ====================
+*.pid
+*.sock
+*.tar
+docker-compose.override.yml
+
+# ====================
+#  Test & coverage
+# ====================
+coverage.xml
+htmlcov/
+.tox/
+.pytest_cache/
+.nox/
+
+# ====================
+#  Deployment
+# ====================
+build/
+dist/
+.eggs/
+*.egg-info/
+MANIFEST
+
+# ====================
+#  Miscellaneous
+# ====================
+*.bak
+*.swp
+.DS_Store
+Thumbs.db
