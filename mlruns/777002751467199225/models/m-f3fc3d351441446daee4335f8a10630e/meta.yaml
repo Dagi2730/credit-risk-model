@@ -1,0 +1,10 @@
+artifact_location: file:///C:/Users/HP/Desktop/credit-risk-model-1/mlruns/777002751467199225/models/m-f3fc3d351441446daee4335f8a10630e/artifacts
+creation_timestamp: 1751362890970
+experiment_id: '777002751467199225'
+last_updated_timestamp: 1751362894120
+model_id: m-f3fc3d351441446daee4335f8a10630e
+model_type: null
+name: RandomForest
+source_run_id: 4d81065ad5ec49beb3dcf18206a9754d
+status: 2
+status_message: null
