@@ -1,133 +1,43 @@
-## Task 2 - Exploratory Data Analysis (EDA) 🔍
+📄 Feature Engineering Overview (Task 3)
+You can copy and paste the following into your README.md:
 
-A credit risk modeling project aimed at developing a robust probability of default model for a digital lending service. The project follows a structured data science pipeline including EDA, feature engineering, and modeling — in partnership with an eCommerce company offering Buy Now, Pay Later services.
+🔧 Feature Engineering Overview
+In this phase, we developed a robust data processing pipeline using scikit-learn to transform raw transaction data into a clean, model-ready format. This was a critical step in preparing high-quality inputs for credit scoring.
 
----
+Key Steps Implemented:
+Custom Feature Extraction
 
-## 📁 Project Structure
+Extracted temporal features from TransactionStartTime:
 
-credit-risk-model/
+TransactionHour, TransactionDay, TransactionMonth, TransactionYear
 
-│
+Aggregated transaction metrics per customer:
 
-├── data/
+TotalTransactionAmount, AverageTransactionAmount, TransactionCount, TransactionAmountStd
 
-│ └── raw/ # Contains original raw datasets
+Preprocessing Pipeline
 
-│ ├── data.csv
+Used SimpleImputer for missing value imputation (median for numerics, mode for categoricals)
 
-│ └── Xente_Variable_Definitions.csv
+Applied StandardScaler for numeric feature standardization
 
-│
+Applied OneHotEncoder for low-cardinality categorical features (excluded high-cardinality like TransactionId, ProductId)
 
-├── notebooks/
+Memory Optimization
 
-│ └── 1.0-eda.ipynb # Jupyter notebook for exploratory analysis
+Categorical columns with high cardinality (e.g. TransactionId, ProductId) were excluded from OneHotEncoding to avoid memory explosion.
 
-│
+Final Output
 
-├── src/ # Scripts for data processing and modeling
+The final dataset includes 48 engineered features, ready for training
 
-│ └── (To be developed)
+The pipeline was tested interactively in 2.0-feature-engineering.ipynb
 
-│
+Saved outputs:
 
-├── images/ # Visual outputs/screenshots from EDA
+data/processed/processed_features.csv
 
-│ └── eda_distribution.png
+data/processed/target.csv (created using FraudResult as proxy)
 
-│
-
-├── requirements.txt # Python dependencies (to be completed)
-
-├── .gitignore # Ignore Python cache, data, and Jupyter checkpoints
-
-├── README.md # Project overview and documentation
-
-└── INTERIM_PROGRESS.md # Interim report with analysis summary and progress
-
-
----
-
-## 🎯 Project Objective
-
-To build a machine learning model that predicts the likelihood of loan default, supporting responsible lending decisions for an eCommerce BNPL (Buy Now, Pay Later) service. This aligns with **Basel II** compliance by quantifying **Probability of Default (PD)** and improving credit risk assessment.
-
----
-
-## 🔍 Task 2 - Exploratory Data Analysis (EDA)
-
-### ✅ Objective  
-Explore the dataset to uncover its structure, quality, and key patterns — laying the foundation for informed feature engineering and modeling decisions.
-
-### 📊 Key Activities
-
-- **Data Structure** – Inspected shape, columns, and datatypes.
-- **Summary Statistics** – Assessed central tendency and spread.
-- **Numerical Feature Distribution** – Visualized with histograms and boxplots.
-- **Categorical Feature Distribution** – Checked category frequencies and imbalances.
-- **Correlation Analysis** – Used heatmaps to study feature relationships.
-- **Missing Values** – Evaluated nulls and concluded no missing data exists.
-- **Outlier Detection** – Used boxplots to flag extreme values.
-
-### 📌 Insights
-
-- No missing values ➡️ reduces need for imputation.
-- Strong skew and outliers in financial features.
-- Some features show multicollinearity.
-- Categorical features show imbalance.
-- Dataset size is sufficient for modeling.
-
-
-## ⚙️ Setup Instructions
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/Dagi2730/credit-risk-model.git
-   cd credit-risk-model
-2. Create and activate virtual environment:
-
-python -m venv venv
-
-venv\Scripts\activate   # Windows
-
-3. Install dependencies:
-
-pip install -r requirements.txt
-
-4. Launch Jupyter Notebook:
-
-jupyter notebook
-
-🚧 Next Steps
-
-Implement feature engineering in src/
-
-Build transformation pipelines using sklearn.pipeline.Pipeline
-
-Encode categorical features (One-Hot / Label Encoding)
-
-Handle outliers and normalization
-
-Begin model development and evaluation
-
-🧰 Tools & Libraries
-
-Python 3.12
-
-Pandas, NumPy
-
-Matplotlib, Seaborn
-
-Jupyter Notebook
-
-(Upcoming: Scikit-learn, XGBoost, SHAP)
-
-🗂️ Status
-
-✅ EDA Completed
-
-🕒 Feature Engineering – Pending
-
-🕒 Modeling – Not Yet Started
-
+📁 Source Code:
+All pipeline logic implemented in: src/feature_engineering.py
