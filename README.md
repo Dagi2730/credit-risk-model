@@ -1,38 +1,65 @@
-## 📌 Task 5 - Model Training and Tracking
+## 📌 Task 6 - Model Deployment and Continuous Integration
 
-In this task, we developed a structured model training pipeline that includes experiment tracking, hyperparameter tuning, model versioning, and performance evaluation.
+In this task, we packaged the trained credit risk prediction model into a containerized REST API service and set up a CI/CD pipeline to automate code quality checks and testing. This enables easy deployment, scalability, and continuous integration to maintain high code standards.
+
+---
+
+### Objective:
+
+- Serve the trained model via a FastAPI REST API.
+- Containerize the API for consistent deployment environments.
+- Automate testing and linting through GitHub Actions CI workflow.
+
+---
 
 ### Approach:
 
-1. **Data Splitting**  
-   The processed dataset was split into training and testing sets with stratification on the `is_high_risk` label to preserve class distribution.
+1. **API Development:**
+   - Built a REST API using FastAPI in `src/api/main.py`.
+   - The API loads the best trained model directly from the MLflow Model Registry.
+   - Created a `/predict` POST endpoint that accepts new customer data (validated with Pydantic models) and returns the predicted risk probability.
+   - Defined request and response schemas in `src/api/pydantic_models.py` for strict input validation and clear API documentation.
 
-2. **Model Selection**  
-   We trained and compared at least two classification models:  
-   - Logistic Regression (with class balancing)  
-   - Random Forest Classifier (with class balancing)
+2. **Containerization:**
+   - Wrote a `Dockerfile` that sets up the environment, installs dependencies, and runs the FastAPI app using Uvicorn.
+   - Created a `docker-compose.yml` file to easily build and run the API service with a single command.
+   - This ensures the service runs consistently across different environments (local, staging, production).
 
-3. **Hyperparameter Tuning**  
-   Hyperparameter optimization was performed using Grid Search with 5-fold cross-validation to identify the best parameter sets for each model.
+3. **Continuous Integration (CI):**
+   - Configured a GitHub Actions workflow in `.github/workflows/ci.yml`.
+   - The workflow triggers on every push to the `main` branch.
+   - It runs two key steps:
+     - A **code linter** (`flake8`) to enforce code style and prevent style issues.
+     - **Unit tests** execution with `pytest` to verify code correctness.
+   - The build fails if any linting errors or failing tests are detected, ensuring code quality before merging.
 
-4. **Model Evaluation**  
-   Models were assessed on the test set using multiple metrics:  
-   - Accuracy  
-   - Precision  
-   - Recall  
-   - F1 Score  
-   - ROC-AUC (Area Under the Receiver Operating Characteristic Curve)
-
-5. **Experiment Tracking and Model Registry**  
-   All training runs and metrics were logged to MLflow for experiment tracking. The best-performing Random Forest model was registered in the MLflow Model Registry for production deployment.
+---
 
 ### Outcome:
 
-- Logistic Regression showed high recall but poor precision, indicating many false positives.
-- Random Forest achieved a better balance between precision and recall, with higher overall ROC-AUC.
-- The registered model can be loaded for inference and further evaluation.
+- The model is now accessible as a scalable API endpoint, facilitating integration with client applications or other services.
+- Containerization guarantees environment reproducibility and ease of deployment.
+- CI pipeline automates quality control, reducing bugs and improving maintainability.
 
-### Files updated:
+---
 
-- `src/train.py` — model training pipeline with hyperparameter tuning, evaluation, MLflow logging, and model registration.
-- MLflow UI for visualizing experiments and metrics.
+### Files updated / created:
+
+- `src/api/main.py` — FastAPI application serving the model.
+- `src/api/pydantic_models.py` — Pydantic schemas for request/response validation.
+- `Dockerfile` — Docker configuration for containerizing the API.
+- `docker-compose.yml` — Compose file for local container orchestration.
+- `.github/workflows/ci.yml` — GitHub Actions CI pipeline configuration.
+- `requirements.txt` — Added `fastapi`, `uvicorn`, and `flake8` dependencies.
+
+---
+
+### How to run locally:
+
+1. **Start the FastAPI app:**
+
+   ```bash
+   uvicorn src.api.main:app --reload
+Access the API docs:
+
+Open http://127.0.0.1:8000/docs in your browser to interact with the API.

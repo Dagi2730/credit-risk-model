@@ -67,3 +67,21 @@ dist/
 # OS files
 .DS_Store
 Thumbs.db
+
+# Ignore virtual environment folder
+.venv/
+
+# Ignore data folders
+data/raw/
+data/processed/
+
+# Ignore MLflow runs folder
+mlruns/
+
+# Ignore Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore Python cache files
+__pycache__/
+*.pyc
+

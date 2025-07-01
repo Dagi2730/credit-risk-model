@@ -6,3 +6,8 @@ jupyterlab
 notebook
 mlflow
 pytest
+fastapi
+uvicorn[standard]
+flake8
+scikit-learn
+
