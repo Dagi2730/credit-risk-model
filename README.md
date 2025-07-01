@@ -1,33 +1,30 @@
-# 📄 Feature Engineering Overview (Task 3)
+## 📌 Task 4 - Proxy Target Variable Engineering
 
-In this phase, we developed a robust data processing pipeline using **scikit-learn** to transform raw transaction data into a clean, model-ready format. This was a critical step in preparing high-quality inputs for credit scoring.
+Since the dataset did not contain a direct "credit risk" label, we engineered a proxy target variable named `is_high_risk` to identify potentially risky customers. This was done by programmatically labeling disengaged customers who are more likely to default on their loans.
 
----
+### Approach:
 
-## 🔧 Key Steps Implemented:
+1. **RFM Metric Calculation**  
+   We computed Recency, Frequency, and Monetary (RFM) values for each customer based on their transaction history.  
+   - **Recency** measures how recently a customer made a transaction relative to a fixed snapshot date.  
+   - **Frequency** counts the total number of transactions per customer.  
+   - **Monetary** sums the total transaction amounts per customer.
 
-### Custom Feature Extraction
-- Extracted temporal features from `TransactionStartTime`:
-  - `TransactionHour`, `TransactionDay`, `TransactionMonth`, `TransactionYear`
-- Aggregated transaction metrics per customer:
-  - `TotalTransactionAmount`, `AverageTransactionAmount`, `TransactionCount`, `TransactionAmountStd`
+2. **Clustering Customers**  
+   We used K-Means clustering to segment customers into 3 groups based on scaled RFM features. A fixed `random_state` was set for reproducibility.
 
-### Preprocessing Pipeline
-- Used `SimpleImputer` for missing value imputation (median for numerics, mode for categoricals)
-- Applied `StandardScaler` for numeric feature standardization
-- Applied `OneHotEncoder` for low-cardinality categorical features (excluded high-cardinality like `TransactionId`, `ProductId`)
+3. **High-Risk Group Identification**  
+   By analyzing cluster characteristics, the cluster with the lowest frequency and monetary values was assigned as the high-risk group.
 
-### Memory Optimization
-- Categorical columns with high cardinality (e.g., `TransactionId`, `ProductId`) were excluded from OneHotEncoding to avoid memory explosion.
+4. **Label Creation and Integration**  
+   A binary target column `is_high_risk` was created, where customers in the high-risk cluster were labeled 1 and others 0. This label was merged back into the main processed dataset for use in model training.
 
-### Final Output
-- The final dataset includes **48 engineered features**, ready for training
-- The pipeline was tested interactively in `2.0-feature-engineering.ipynb`
-- Saved outputs:
-  - `data/processed/processed_features.csv`
-  - `data/processed/target.csv` (created using `FraudResult` as proxy)
+### Outcome:
 
----
+- The `is_high_risk` target variable serves as a proxy for credit risk, enabling supervised modeling despite the absence of explicit default labels.
+- This approach facilitates the identification of customers who are likely to default, based on behavioral transaction patterns.
 
-## 📁 Source Code:
-- All pipeline logic implemented in: `src/feature_engineering.py`
+### Files updated:
+
+- `data/processed/raw_with_high_risk_label.csv` — processed dataset including the `is_high_risk` target column.
+- Relevant code for RFM calculation, clustering, and labeling is implemented in the Task 4 notebook and/or scripts.
